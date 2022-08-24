@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  say-hello:
+    description: Leave your colleagues a helpful message to tell them what this job does
+    parameters:
+      audience:
+        description: "Who are we greeting?"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - run: echo "Hello << parameters.audience >>"
+      
+workflows:
+  greeting:
+    jobs:
+      - say-hello:
+          audience: Friends
+      - say-hello
+      - say-hello:
+          audience: Universe
